@@ -21,9 +21,33 @@
   <button onclick="isEvenAndGreaterThanTenDemo()">Is Even And Greater Than Ten</button>
   <button onclick="computeAreaOfATriangleDemo()">Compute Area Of A Triangle</button>
 
-  <p id="output"></p>
+  <br><br>
 
-  <script src="index.js"></script>
+  Сторінка привітання <br>
+  "Hello WORLD"<br>
+  <button value="Кнопка вітання">Привітати СВІТ</button>
+
+  <script>
+      // Створення обробника події «кліку»
+      document.querySelector('button').onclick = myFunction;
+
+      function myFunction() {
+          "use strict"; // ECMAScript стандарт
+          var myHeading = document.querySelector('button');
+          myHeading.style.display = "none"; // Приховуємо кнопку
+
+          var h1 = document.createElement('h1');
+          h1.className = "big"; // Додаємо клас
+          h1.id = "big"; // Додаємо ID
+          document.body.appendChild(h1); // Додаємо заголовок до сторінки
+          h1.appendChild(document.createTextNode("Я ВІТАЮ ТЕБЕ СВІТ!!!")); // Додаємо текст у h1
+
+          // Стилізація заголовка
+          document.getElementsByTagName("h1")[0].style.color = "red";
+          document.getElementById("big").style.fontSize = "4em";
+          document.getElementById("big").style.textAlign = "center";
+      }
+  </script>
 
 </body>
 </html>
