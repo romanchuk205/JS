@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Виведення інформації</title>
+</head>
+<body>
+    <div class="temp m1"></div>
+
+    <script>
+        // innerHTML
+        var sum = 0.1 + 0.2;
+        var result = document.getElementsByClassName("m1")[0];
+        result.innerHTML = "В JavaScript " + "<br>" + " 0.1 + 0.2 = " + sum;
+        result.style.color = '#2d264a';
+
+        // document.write()
+        document.write("Результат document.write: " + (9 + 10));
+
+        // alert()
+        alert("Важлива інформація!");
+
+        // console.log()
+        console.log(20 + 17);
+    </script>
+</body>
+</html>
