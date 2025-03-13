@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Прямі лінії</title>
+    <script>
+        function line(x1, y1, x2, y2, n) {
+            var xstr = "";
+            var xstr0 = '<div style="position:absolute; width:' + n + 'px; height:' + n + 'px; background-color:black; ';
+            var k = (y2 - y1) / (x2 - x1);
+            var x = x1;
+
+            while (x <= x2) {
+                xstr += xstr0 + 'top:' + (k * (x - x1) + y1) + 'px; left:' + x + 'px;"></div>';
+                x++;
+            }
+            document.body.innerHTML += xstr;
+        }
+    </script>
+</head>
+<body>
+    <h2>Малювання прямих ліній</h2>
+    
+    <script>
+        line(100, 100, 400, 400, 3);
+        line(100, 400, 400, 100, 10);
+    </script>
+
+    <!-- Горизонтальна лінія -->
+    <div style="position:absolute; top:250px; left:100px; width:300px; height:1px;">
+        <hr noshade>
+    </div>
+
+    <!-- Вертикальна лінія -->
+    <div style="position:absolute; top:100px; left:250px; width:1px; height:300px; background-color:#ff0099;"></div>
+</body>
+</html>
