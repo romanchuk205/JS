@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1.1</title>
+    <style>
+        #row1 {
+            background-color: yellow;
+            color: black;
+        }
+        #row2 {
+            background-color: white;
+            color: red;
+        }
+        #row3 {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2 id="row1">Доступ до властивостей і методів</h2>
+    <p id="row2">Колекція all</p>
+    <div id="row3">Метод getElementById ()</div>
+
+    <script>
+        // Функція для зміни кольору першого та третього рядка
+        function changeColorsRow1and3(id) {
+            let row = document.getElementById(id);
+            if (row.style.color === 'black') {
+                row.style.color = 'white';
+                row.style.backgroundColor = 'blue';
+            } else {
+                row.style.color = 'black';
+                row.style.backgroundColor = 'yellow';
+            }
+        }
+
+        // Функція для зміни кольору другого рядка
+        function changeColorsRow2() {
+            let row2 = document.all[1];
+            if (row2.style.color === 'red') {
+                row2.style.color = 'white';
+                row2.style.backgroundColor = 'green';
+            } else {
+                row2.style.color = 'red';
+                row2.style.backgroundColor = 'white';
+            }
+        }
+
+        // Додавання подій для зміни кольору
+        document.getElementById('row1').onclick = function() {
+            changeColorsRow1and3('row1');
+        };
+
+        document.getElementById('row2').onclick = changeColorsRow2;
+
+        document.getElementById('row3').onclick = function() {
+            changeColorsRow1and3('row3');
+        };
+    </script>
+</body>
+</html>
