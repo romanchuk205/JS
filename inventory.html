@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Облік товарів</title>
+    <meta charset="UTF-8">
+    <script>
+        function isNumb(fld) {
+            var t = fld.value;
+            for (var i = 0; i < t.length; i++) {
+                var ch = t.charAt(i);
+                if ((ch < "0" || ch > "9") && !(ch == "," || ch == ".")) {
+                    alert("Не цифра");
+                    fld.focus();
+                    fld.select();
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        function updateTable() {
+            var product = document.getElementById("product").value;
+            var price = parseFloat(document.getElementById("price").value);
+            var quantity = parseInt(document.getElementById("quantity").value);
+            
+            if (!price || !quantity) {
+                alert("Введіть правильні значення ціни та кількості!");
+                return;
+            }
+            
+            var table = document.getElementById("productTable");
+            var found = false;
+            
+            // Оновлення існуючого товару
+            for (var i = 1; i < table.rows.length - 1; i++) {
+                if (table.rows[i].cells[0].innerHTML == product) {
+                    table.rows[i].cells[1].innerHTML = price;
+                    table.rows[i].cells[2].innerHTML = quantity;
+                    table.rows[i].cells[3].innerHTML = price * quantity;
+                    found = true;
+                    break;
+                }
+            }
+            
+            // Перерахунок суми
+            updateTotal();
+        }
+        
+        function updateTotal() {
+            var table = document.getElementById("productTable");
+            var total = 0;
+            
+            for (var i = 1; i < table.rows.length - 1; i++) {
+                total += parseFloat(table.rows[i].cells[3].innerHTML);
+            }
+            
+            table.rows[table.rows.length - 1].cells[3].innerHTML = total;
+        }
+    </script>
+</head>
+<body>
+    <h1 align="center">Облік надходження товарів</h1>
+    
+    <div style="margin: 0 auto; width: 600px;">
+        <table id="productTable" border="1" style="border-collapse: collapse; width: 100%;">
+            <tr>
+                <th>Найменування товару</th>
+                <th>ціна за одиницю</th>
+                <th>кількість</th>
+                <th>вартість</th>
+            </tr>
+            <tr>
+                <td>Стіл письмовий</td>
+                <td>12000</td>
+                <td>5</td>
+                <td>60000</td>
+            </tr>
+            <tr>
+                <td>Стіл кухонний</td>
+                <td>8000</td>
+                <td>10</td>
+                <td>80000</td>
+            </tr>
+            <tr>
+                <td>Стілець</td>
+                <td>20</td>
+                <td>1200</td>
+                <td>12000</td>
+            </tr>
+            <tr>
+                <td>Шафа книжкова</td>
+                <td>14200</td>
+                <td>4</td>
+                <td>68800</td>
+            </tr>
+            <tr>
+                <td colspan="3">ВСЬОГО</td>
+                <td>220800</td>
+            </tr>
+        </table>
+        
+        <div style="margin-top: 20px;">
+            <h3>Зміна ціни і кількості</h3>
+            <p>
+                Товар ......... 
+                <select id="product">
+                    <option value="Стіл письмовий">Стіл письмовий</option>
+                    <option value="Стіл кухонний">Стіл кухонний</option>
+                    <option value="Стілець">Стілець</option>
+                    <option value="Шафа книжкова">Шафа книжкова</option>
+                </select>
+            </p>
+            <p>
+                Ціна ......... <input type="text" id="price" onchange="isNumb(this)">
+            </p>
+            <p>
+                Кількість <input type="text" id="quantity" onchange="isNumb(this)">
+            </p>
+            <p>
+                <button onclick="updateTable()">Ввод</button>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
