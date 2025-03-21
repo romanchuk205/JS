@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Завдання 6</title>
+  <style>
+    .size-info {
+      margin: 20px;
+      font-family: monospace;
+      font-size: 24px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="size-info" id="sizeInfo">Ширина: 0px, Висота: 0px</div>
+
+  <script>
+    const sizeInfo = document.getElementById('sizeInfo');
+    
+    // Функція для оновлення інформації про розмір вікна
+    function updateSize() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      sizeInfo.textContent = `Ширина: ${width}px, Висота: ${height}px`;
+    }
+    
+    // Викликаємо відразу, щоб показати початковий розмір
+    updateSize();
+    
+    // Відстежуємо зміну розміру вікна
+    window.addEventListener('resize', updateSize);
+  </script>
+</body>
+</html>

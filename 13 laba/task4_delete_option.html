@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Завдання 4</title>
+  <style>
+    .container {
+      margin: 20px;
+    }
+    select {
+      width: 200px;
+      height: 30px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <select id="select">
+      <option value="1">Перший елемент</option>
+      <option value="2">Другий елемент</option>
+      <option value="3">Третій елемент</option>
+      <option value="4">Четвертий елемент</option>
+      <option value="5">П'ятий елемент</option>
+    </select>
+    <br>
+    <button id="deleteBtn">Видалити обраний елемент</button>
+  </div>
+
+  <script>
+    document.getElementById('deleteBtn').addEventListener('click', function() {
+      const select = document.getElementById('select');
+      // Перевіряємо, чи є обраний елемент і чи залишились опції у списку
+      if (select.selectedIndex !== -1 && select.options.length > 0) {
+        // Видаляємо обраний елемент
+        select.remove(select.selectedIndex);
+      }
+    });
+  </script>
+</body>
+</html>
