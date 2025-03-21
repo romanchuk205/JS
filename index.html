@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота 15 - jQuery</title>
+    <!-- Підключаємо jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        section {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #333;
+        }
+        .task-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 5px 10px;
+            margin: 5px;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Практична робота 15 - Використання бібліотеки jQuery</h1>
+
+    <!-- Завдання 1 -->
+    <section id="task1">
+        <div class="task-title">Завдання 1: Додавання target="_blank" до посилань</div>
+        <p>Список посилань для тестування:</p>
+        <ul>
+            <li><a href="https://example.com">Посилання з https (повинно відкритись в новій вкладці)</a></li>
+            <li><a href="http://example.org">Посилання з http (звичайне)</a></li>
+            <li><a href="/local/path">Локальне посилання</a></li>
+        </ul>
+        <button id="run-task1">Запустити скрипт</button>
+    </section>
+
+    <!-- Завдання 2 -->
+    <section id="task2">
+        <div class="task-title">Завдання 2: Стилізація заголовків h2</div>
+        <div id="headers-container">
+            <h2 class="head">header1</h2>
+            <h2 class="head">header2 <span class="inner">inner elem1</span></h2>
+            <h2>header3</h2>
+            <h2 class="head">header4<span>inner elem2</span></h2>
+            <h2>header5</h2>
+        </div>
+        <button id="run-task2">Запустити скрипт</button>
+    </section>
+
+    <!-- Завдання 3 -->
+    <section id="task3">
+        <div class="task-title">Завдання 3: Переміщення div-елементів</div>
+        <div id="divs-container">
+            <h3>header1</h3>
+            <div>text1</div>
+            <h3>header2</h3>
+            <div>text2</div>
+        </div>
+        <button id="run-task3">Запустити скрипт</button>
+    </section>
+
+    <!-- Завдання 4 -->
+    <section id="task4">
+        <div class="task-title">Завдання 4: Обмеження вибору чекбоксів</div>
+        <div>
+            <label><input type="checkbox"> Чекбокс 1</label><br>
+            <label><input type="checkbox"> Чекбокс 2</label><br>
+            <label><input type="checkbox"> Чекбокс 3</label><br>
+            <label><input type="checkbox"> Чекбокс 4</label><br>
+            <label><input type="checkbox"> Чекбокс 5</label><br>
+            <label><input type="checkbox"> Чекбокс 6</label><br>
+        </div>
+        <p id="checkbox-counter">Відмічено: 0</p>
+    </section>
+
+    <!-- Завдання 5-9 -->
+    <section id="task5-9">
+        <div class="task-title">Завдання 5-9: Результати виконання скриптів</div>
+        <div>
+            <button id="run-task5">Завдання 5</button>
+            <button id="run-task6">Завдання 6</button>
+            <button id="run-task7">Завдання 7</button>
+            <button id="run-task8">Завдання 8</button>
+            <button id="run-task9">Завдання 9</button>
+        </div>
+        <pre id="console-output"></pre>
+    </section>
+
+    <!-- JavaScript код -->
+    <script>
+        // Загальна функція для виводу результатів у "консоль"
+        function log(message) {
+            const output = $('#console-output');
+            output.append(message + '\n');
+        }
+
+        // Очищення консолі
+        function clearLog() {
+            $('#console-output').empty();
+        }
+
+        // Завдання 1
+        $('#run-task1').on('click', function() {
+            $('a').each(function() {
+                let href = $(this).attr('href');
+                if (href && href.startsWith('https://')) {
+                    $(this).attr('target', '_blank');
+                }
+            });
+            log('Завдання 1: Посиланням з https:// додано атрибут target="_blank"');
+        });
+
+        // Завдання 2
+        $('#run-task2').on('click', function() {
+            $('h2.head').css('background-color', 'green');
+            $('h2.head .inner').css('font-size', '35px');
+            log('Завдання 2: Застосовано стилі до заголовків h2');
+        });
+
+        // Завдання 3
+        $('#run-task3').on('click', function() {
+            $('#divs-container h3 + div').each(function() {
+                let div = $(this);
+                let h3 = div.prev('h3');
+                div.insertBefore(h3);
+            });
+            log('Завдання 3: div-елементи переміщено над h3');
+        });
+
+        // Завдання 4
+        $('#task4 input[type="checkbox"]').on('change', function() {
+            const checkedCount = $('#task4 input[type="checkbox"]:checked').length;
+            $('#checkbox-counter').text(`Відмічено: ${checkedCount}`);
+            
+            if (checkedCount >= 3) {
+                $('#task4 input[type="checkbox"]').prop('disabled', true);
+                log('Завдання 4: 3 чекбокси відмічено. Всі чекбокси зроблено неактивними.');
+            }
+        });
+
+        // Завдання 5
+        $('#run-task5').on('click', function() {
+            clearLog();
+            log('Завдання 5: Деструктуризація масиву');
+            
+            let arr = ["Tom", "Sam", "Ray", "Bob"];
+            let [x, y, , ...z] = arr;
+            
+            log(`console.log(x); // ${x}`);
+            log(`console.log(y); // ${y}`);
+            log(`console.log(z); // ${JSON.stringify(z)}`);
+        });
+
+        // Завдання 6
+        $('#run-task6').on('click', function() {
+            clearLog();
+            log('Завдання 6: Деструктуризація об\'єкта');
+            
+            let data = {
+                names: ["Sam", "Tom", "Ray", "Bob"],
+                ages: [20, 24, 22, 26],
+            };
+            
+            let {
+                names: [, name2, , name4],
+                ages: [, age2, , age4]
+            } = data;
+            
+            log(`console.log(name2); // ${name2}`);
+            log(`console.log(age2); // ${age2}`);
+            log(`console.log(name4); // ${name4}`);
+            log(`console.log(age4); // ${age4}`);
+        });
+
+        // Завдання 7
+        $('#run-task7').on('click', function() {
+            clearLog();
+            log('Завдання 7: Функція mul()');
+            
+            function mul(...args) {
+                const numbers = args.filter(arg => typeof arg === 'number');
+                
+                if (numbers.length === 0) {
+                    return 0;
+                }
+                
+                return numbers.reduce((product, num) => product * num, 1);
+            }
+            
+            log(`console.log(mul(1, "str", 2, 3, true)); // ${mul(1, "str", 2, 3, true)}`);
+            log(`console.log(mul(null, "str", false, true)); // ${mul(null, "str", false, true)}`);
+        });
+
+        // Завдання 8
+        $('#run-task8').on('click', function() {
+            clearLog();
+            log('Завдання 8: Стрілкові функції замість bind()');
+            
+            let server = {
+                data: 0,
+                convertToString: function(callback) {
+                    callback(() => {
+                        return this.data + "";
+                    });
+                }
+            };
+            
+            let client = {
+                server: server,
+                result: "",
+                calc: function(data) {
+                    this.server.data = data;
+                    this.server.convertToString(this.notification());
+                },
+                notification: function() {
+                    return callback => {
+                        this.result = callback();
+                    };
+                }
+            };
+            
+            client.calc(123);
+            log(`console.log(client.result); // ${client.result}`);
+            log(`console.log(typeof client.result); // ${typeof client.result}`);
+        });
+
+        // Завдання 9
+        $('#run-task9').on('click', function() {
+            clearLog();
+            log('Завдання 9: Функція mapBuilder()');
+            
+            function mapBuilder(keysArray, valuesArray) {
+                const map = new Map();
+                
+                for (let i = 0; i < keysArray.length; i++) {
+                    map.set(keysArray[i], valuesArray[i]);
+                }
+                
+                return map;
+            }
+            
+            let keys = [1, 2, 3, 4];
+            let values = ["div", "span", "b", "i"];
+            let map = mapBuilder(keys, values);
+            
+            log(`console.log(map.size); // ${map.size}`);
+            log(`console.log(map.get(2)); // ${map.get(2)}`);
+        });
+    </script>
+</body>
+</html>
