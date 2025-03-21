@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Світлофор</title>
+    <style>
+        .light {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            border-radius: 50%;
+            background-color: gray;
+        }
+        .red { background-color: red; }
+        .yellow { background-color: yellow; }
+        .green { background-color: green; }
+    </style>
+</head>
+<body>
+    <div id="red" class="light"></div>
+    <div id="yellow" class="light"></div>
+    <div id="green" class="light"></div>
+
+    <button onclick="changeLight()">Змінити світло</button>
+
+    <script>
+        let currentLight = 0;
+        const lights = ['red', 'yellow', 'green'];
+
+        function changeLight() {
+            document.getElementById(lights[currentLight]).classList.remove(lights[currentLight]);
+            currentLight = (currentLight + 1) % 3;
+            document.getElementById(lights[currentLight]).classList.add(lights[currentLight]);
+        }
+    </script>
+</body>
+</html>

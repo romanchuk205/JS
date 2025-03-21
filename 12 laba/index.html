@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тригонометричні функції</title>
+    <meta charset="UTF-8">
+    <script>
+        function isNumb(fld) {
+            var t = fld.value;
+            for (var i = 0; i < t.length; i++) {
+                var ch = t.charAt(i);
+                if ((ch < "0" || ch > "9") && !(ch == "," || ch == ".")) {
+                    alert("Не цифра");
+                    fld.focus();
+                    fld.select();
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        function calculate() {
+            var func = document.getElementById("func").value;
+            var start = parseFloat(document.getElementById("start").value);
+            var end = parseFloat(document.getElementById("end").value);
+            var step = parseFloat(document.getElementById("step").value);
+            
+            if (start > end) {
+                alert("Початок діапазону має бути менше кінця!");
+                return;
+            }
+            
+            var resultWin = window.open("", "", "width=600,height=500");
+            resultWin.document.write("<html><head><title>Результат</title>");
+            resultWin.document.write("<style>table {border-collapse: collapse; width: 80%; margin: 0 auto;} th, td {border: 1px solid black; padding: 8px; text-align: center;}</style>");
+            resultWin.document.write("</head><body>");
+            resultWin.document.write("<h2 align='center'>Таблиця значень функції " + func + "</h2>");
+            
+            resultWin.document.write("<table>");
+            resultWin.document.write("<tr><th rowspan='2'>Кут</th><th colspan='2'>" + func + "</th></tr>");
+            resultWin.document.write("<tr><th>в градусах</th><th>в радіанах</th></tr>");
+            
+            for (var angle = start; angle <= end; angle += step) {
+                var radians = angle * Math.PI / 180;
+                var funcValue;
+                
+                if (func === "синус") {
+                    funcValue = Math.sin(radians);
+                } else if (func === "косинус") {
+                    funcValue = Math.cos(radians);
+                } else if (func === "тангенс") {
+                    funcValue = Math.tan(radians);
+                }
+                
+                resultWin.document.write("<tr>");
+                resultWin.document.write("<td>" + angle + "</td>");
+                resultWin.document.write("<td>" + radians.toFixed(4) + "</td>");
+                resultWin.document.write("<td>" + funcValue.toFixed(4) + "</td>");
+                resultWin.document.write("</tr>");
+            }
+            
+            resultWin.document.write("</table>");
+            resultWin.document.write("</body></html>");
+            resultWin.document.close();
+        }
+    </script>
+</head>
+<body>
+    <h1 align="center">ТРИГОНОМЕТРИЧНІ ФУНКЦІЇ</h1>
+    
+    <div style="margin: 0 auto; width: 400px;">
+        <p>
+            Функція ......... 
+            <select id="func">
+                <option value="синус">синус</option>
+                <option value="косинус">косинус</option>
+                <option value="тангенс">тангенс</option>
+            </select>
+        </p>
+        
+        <p>Введіть діапазон кутів в градусах</p>
+        
+        <p>
+            початок <input type="text" id="start" value="30" onchange="isNumb(this)">
+        </p>
+        
+        <p>
+            кінець <input type="text" id="end" value="40" onchange="isNumb(this)">
+        </p>
+        
+        <p>
+            крок ... <input type="text" id="step" value="0.5" onchange="isNumb(this)">
+        </p>
+        
+        <p>
+            <button onclick="calculate()">Обчислити</button>
+        </p>
+    </div>
+</body>
+</html>

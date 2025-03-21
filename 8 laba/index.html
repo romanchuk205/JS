@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Події з мишкою</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body id="B" style="height: 600px; background-color: #AAAAAA" onclick="rodEl(event)">
+  <h1 id="HH" onclick="H_l()">КОЛІР</h1>
+  <p id="alfa" align="right" onmouseover="M_Over()" onmouseout="M_Out()">Подія onMouseOver і onMouseOut</p>
+  <div id="k1" onclick="D_l()">
+    <div id="k2" onclick="D_2(this)"></div>
+  </div>
+  <div>
+    <p onclick="changeTextStyle(this)">Клацніть на мене мишкою</p>
+    <p onmousedown="changeBackgroundColorOnMouseDown(this)" onmouseup="changeBackgroundColorOnMouseUp(this)">На цьому тексті натисніть, потримайте і відпустіть ліву кнопку мишки</p>
+    <p onmouseover="changeBackgroundColorOnMouseOver(this)" onmouseout="changeBackgroundColorOnMouseOut(this)">Повільно проведіть курсором мишки по цій написи</p>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
