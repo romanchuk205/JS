@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Завдання 3</title>
+  <style>
+    body {
+      transition: background-color 0.3s ease;
+    }
+    button {
+      margin: 10px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <button id="btn1">Кнопка 1</button>
+  <button id="btn2">Кнопка 2</button>
+  <button id="btn3">Кнопка 3</button>
+  <br>
+  <a href="#" id="link">Це посилання</a>
+
+  <script>
+    // 1) 1-ша кнопка - клік змінює фон на синій
+    document.getElementById('btn1').addEventListener('click', function() {
+      document.body.style.backgroundColor = 'blue';
+    });
+
+    // 2) 2-га кнопка - подвійний клік змінює фон на рожевий
+    document.getElementById('btn2').addEventListener('dblclick', function() {
+      document.body.style.backgroundColor = 'pink';
+    });
+
+    // 3) 3-тя кнопка - при натисканні фон коричневий, при відпусканні білий
+    document.getElementById('btn3').addEventListener('mousedown', function() {
+      document.body.style.backgroundColor = 'brown';
+    });
+    document.getElementById('btn3').addEventListener('mouseup', function() {
+      document.body.style.backgroundColor = 'white';
+    });
+
+    // 4) Посилання - при наведенні фон жовтий, при відведенні білий
+    document.getElementById('link').addEventListener('mouseover', function() {
+      document.body.style.backgroundColor = 'yellow';
+    });
+    document.getElementById('link').addEventListener('mouseout', function() {
+      document.body.style.backgroundColor = 'white';
+    });
+  </script>
+</body>
+</html>

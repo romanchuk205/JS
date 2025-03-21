@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Побудова еліпса</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #mosaic-container {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            margin: 20px auto;
+            background-color: white; /* Змінено на білий фон */
+            border: 1px solid black; /* Додано чорну обводку */
+        }
+        .pixel {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: black;
+        }
+    </style>
+    <script>
+        function drawEllipse() {
+            let a = parseInt(document.getElementById("a").value); // Велика піввісь
+            let b = parseInt(document.getElementById("b").value); // Мала піввісь
+
+            if (isNaN(a) || isNaN(b) || a <= 0 || b <= 0) {
+                alert("Введіть коректні значення!");
+                return;
+            }
+
+            drawMosaicEllipse(a, b);
+            drawSVGEllipse(a, b);
+            drawCanvasEllipse(a, b);
+        }
+
+        function drawMosaicEllipse(a, b) {
+            let container = document.getElementById("mosaic-container");
+            container.innerHTML = ""; // Очищаємо попередній малюнок
+            let centerX = 200, centerY = 150;
+
+            for (let t = 0; t <= 2 * Math.PI; t += 0.02) {
+                let x = Math.round(a * Math.cos(t)) + centerX;
+                let y = Math.round(b * Math.sin(t)) + centerY;
+
+                let pixel = document.createElement("div");
+                pixel.className = "pixel";
+                pixel.style.left = x + "px";
+                pixel.style.top = y + "px";
+                container.appendChild(pixel);
+            }
+        }
+
+        function drawSVGEllipse(a, b) {
+            document.getElementById("svg-ellipse").setAttribute("rx", a);
+            document.getElementById("svg-ellipse").setAttribute("ry", b);
+        }
+
+        function drawCanvasEllipse(a, b) {
+            let canvas = document.getElementById("canvas");
+            let ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.beginPath();
+            ctx.ellipse(200, 150, a, b, 0, 0, 2 * Math.PI);
+            ctx.stroke();
+        }
+    </script>
+</head>
+<body>
+    <h2>Побудова еліпса</h2>
+    <label>Велика піввісь (a):</label>
+    <input type="number" id="a" value="100">
+    <label>Мала піввісь (b):</label>
+    <input type="number" id="b" value="50">
+    <button onclick="drawEllipse()">Побудувати</button>
+
+    <h3>Метод 1: Мозаїка (пікселі)</h3>
+    <div id="mosaic-container"></div>
+
+    <h3>Метод 2: SVG</h3>
+    <svg width="400" height="300" style="border:1px solid black;">
+        <ellipse id="svg-ellipse" cx="200" cy="150" rx="100" ry="50" fill="none" stroke="black"/>
+    </svg>
+
+    <h3>Метод 3: Canvas</h3>
+    <canvas id="canvas" width="400" height="300" style="border:1px solid black;"></canvas>
+</body>
+</html>
