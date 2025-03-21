@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Перегляд фотографій</title>
+    <script>
+        var photo = {
+            "les": new Image(),
+            "ozero": new Image(),
+            "most": new Image(),
+            "doroga": new Image()
+        };
+        
+photo["les"].src = "images/les.jpg";
+photo["ozero"].src = "images/ozero.jpg";
+photo["most"].src = "images/most.jpeg";
+photo["doroga"].src = "images/doroga.jpg";
+
+
+        function prosm(list) {
+            var d = list.value;
+            document.getElementById("fot").src = photo[d].src;
+        }
+    </script>
+</head>
+<body>
+    <h2>Виберіть фотографію</h2>
+    <select onchange="prosm(this)">
+        <option value="les">Ліс</option>
+        <option value="ozero">Озеро</option>
+        <option value="most">Міст</option>
+        <option value="doroga">Дорога</option>
+    </select>
+    <br><br>
+    <img id="fot" src="les.jpg" width="400" height="300">
+</body>
+</html>
