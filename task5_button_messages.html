@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Завдання 5</title>
+  <style>
+    .container {
+      margin: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-bottom: 20px;
+    }
+    #output {
+      font-family: monospace;
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 300px;
+      min-height: 150px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button id="actionBtn">Інтерактивна кнопка</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('actionBtn');
+    const output = document.getElementById('output');
+
+    // Функція для додавання повідомлень
+    function addMessage(message) {
+      const line = document.createElement('div');
+      line.textContent = message;
+      output.appendChild(line);
+    }
+
+    // При натисканні на кнопку
+    btn.addEventListener('click', function() {
+      addMessage("I was pressed!");
+    });
+
+    // При наведенні на кнопку
+    btn.addEventListener('mouseover', function() {
+      addMessage("Mouse on me!");
+    });
+
+    // При відведенні курсора від кнопки
+    btn.addEventListener('mouseout', function() {
+      addMessage("Mouse is not on me!");
+    });
+  </script>
+</body>
+</html>

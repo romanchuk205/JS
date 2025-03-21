@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Завдання 7</title>
+  <style>
+    .container {
+      margin: 20px;
+    }
+    select {
+      width: 200px;
+      height: 30px;
+      margin-right: 20px;
+      margin-bottom: 20px;
+    }
+    #selectedInfo {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <select name="country" id="country">
+      <option value="ger">Germany</option>
+      <option value="usa">USA</option>
+      <option value="ukr">Ukraine</option>
+    </select>
+    
+    <select name="cities" id="cities"></select>
+    
+    <p id="selectedInfo"></p>
+  </div>
+
+  <script>
+    // Масив об'єктів з містами для кожної країни
+    const citiesByCountry = {
+      ger: ['Berlin', 'Hamburg', 'Munich', 'Cologne', 'Frankfurt'],
+      usa: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Miami'],
+      ukr: ['Kyiv', 'Lviv', 'Odesa', 'Kharkiv', 'Dnipro']
+    };
+    
+    const countrySelect = document.getElementById('country');
+    const citiesSelect = document.getElementById('cities');
+    const selectedInfo = document.getElementById('selectedInfo');
+    
+    // Функція для оновлення списку міст
+    function updateCities() {
+      // Отримуємо поточну обрану країну
+      const selectedCountry = countrySelect.value;
+      
+      // Очищаємо список міст
+      citiesSelect.innerHTML = '';
+      
+      // Додаємо міста для обраної країни
+      citiesByCountry[selectedCountry].forEach(city => {
+        const option = document.createElement('option');
+        option.value = city.toLowerCase();
+        option.textContent = city;
+        citiesSelect.appendChild(option);
+      });
+      
+      // Оновлюємо відображення обраної країни та міста
+      updateSelectedInfo();
+    }
+    
+    // Функція для оновлення інформації про обрані країну і місто
+    function updateSelectedInfo() {
+      const countryText = countrySelect.options[countrySelect.selectedIndex].text;
+      const cityText = citiesSelect.options[citiesSelect.selectedIndex]?.text || '';
+      
+      selectedInfo.textContent = `Selected country: ${countryText}, city: ${cityText}`;
+    }
+    
+    // Початково заповнюємо список міст
+    updateCities();
+    
+    // Слухаємо зміни в випадаючому списку країн
+    countrySelect.addEventListener('change', updateCities);
+    
+    // Слухаємо зміни в випадаючому списку міст
+    citiesSelect.addEventListener('change', updateSelectedInfo);
+  </script>
+</body>
+</html>
